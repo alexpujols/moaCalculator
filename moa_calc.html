@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/xhtml1-frameset.dtd">
+<html>
+	<head><title>Snipers SureShot</title></head>
+	<style type="text/css" media="screen">
+		.shotEntry {
+							border: 1px solid #999999; 
+							font: normal 10px helvetica; 
+							color: #444444;  
+							background-color: #eeeeee;
+							border: 0px <!-- solid red -->;
+							padding: 2% 2% 2% 2%; <!-- top, right, bottom, left -->
+							border-spacing: 10px 10px;<!-- horizontal, vertical -->
+							}
+							
+		.shotDisplayTable {
+							border: 1px solid #999999; 
+							font: normal 10px helvetica; 
+							color: #444444;
+							background-color: #eeeeee;
+							border: 0px <!-- solid red -->;							
+							padding: 2% 2% 2% 2%; <!-- top, right, bottom, left -->
+							border-spacing: 10px 10px;				
+							}
+							
+		.shotDisplayData {
+							border: 1px solid #999999; 
+							font: normal 12px helvetica; 
+							color: #444444;
+							background-color: #FFFFFF;
+							border: 0px solid black;							
+							text-align: center;			
+							}
+		.subscripts { 
+							font: italic 8px helvetica; 		
+							}
+	</style>
+	
+	<body>
+		<script type="text/javascript">
+			
+		function getShotData(){	
+		/* Function to print values to form */		
+
+		/* Take values from form and send to memory */
+		var distanceToTarget = document.forms['shotEntryForm'].distanceToTargetData.value;
+		var targetElevation = document.forms['shotEntryForm'].targetElevationData.value;
+		var headwind = document.forms['shotEntryForm'].headwindData.value;
+		var midwind = document.forms['shotEntryForm'].midwindData.value;
+		var tailwind = document.forms['shotEntryForm'].tailwindData.value;
+		var scopeClickValue = '';
+		var bulletCalibre = document.forms['shotEntryForm'].bulletCalibreData.value;
+		var bulletWeight = document.forms['shotEntryForm'].bulletWeightData.value;
+		
+		/* Validate user input to insure accurate data*/
+		scopeClickValue = validatescopeClickValue(document.forms['shotEntryForm'].scopeClickValueData.value);
+		
+		/* Declare values for computed results by executing associated funtions */
+		var mouValue = computemouValue(distanceToTarget);
+		var elevationInClicks = computeelevationInClicks(mouValue, targetElevation, scopeClickValue);
+		var azmuthInClicks = computeazmuthInClicks(mouValue, headwind, midwind, tailwind);
+		
+		/* Take computed values and send to text areas */
+		document.forms['shotEntryForm'].mouValueData.value = mouValue + ' inches';
+		document.forms['shotEntryForm'].elevationInClicks.value = elevationInClicks + ' clicks';
+		document.forms['shotEntryForm'].azmuthInClicks.value = azmuthInClicks;
+		}			
+			
+		function validatedistanceToTarget() {
+		/* Function to print values to form */
+		/* return "" */
+		}		
+		function validatetargetElevation() {
+		/* Function to print values to form */
+		/* return "" */
+		}	
+		function validateheadwind() {
+		/* Function to print values to form */
+		/* return "" */
+		}	
+		function validatemidwind() {
+		/* Function to print values to form */
+		/* return "" */
+		}		
+		function validatetailwind() {
+		/* Function to print values to form */
+		/* return "" */
+		}	
+		function validatescopeClickValue() {
+		/* Function to print values to form */
+		var scopeValue = '';
+		
+		for (i = 0; i < document.forms['shotEntryForm'].scopeClickValueData.length; i++) 
+			{
+			if (document.forms['shotEntryForm'].scopeClickValueData[i].checked) 
+				{
+				scopeValue = document.forms['shotEntryForm'].scopeClickValueData[i].value;
+				}
+			}
+		
+		return scopeValue;
+		}
+		function validatebulletCalibre() {
+		/* Function to print values to form */
+		/* return "" */
+		}
+		function validatebulletWeight() {
+		/* Function to print values to form */
+		/* return "" */
+		}
+		function validatemouValue() {
+		/* Function to print values to form */
+		/* return "" */
+		}
+		function validateelevationInClicks() {
+		/* Function to print values to form */
+		/* return "" */
+		}
+		function validateazmuthInClicks() {
+		/* Function to print values to form */
+		/* return "" */
+		}
+		function computeazmuthInClicks(mouValue, headwind, midwind, tailwind) {
+		/* Function to compute from values in form */
+		azmuthInClicks ='';
+		
+		
+		return azmuthInClicks;
+		}
+		
+		function computeelevationInClicks(mouValue, targetElevation, scopeClickValue) {
+		/* Function to compute from values in form */
+		elevationInClicks = (mouValue / scopeClickValue);
+		
+		return elevationInClicks;
+		}
+		
+		function computemouValue(distanceToTarget) {
+		/* Function to compute from values in form */
+		var PI = 3.14159265;
+		var totalMOA = 21600;
+		var circleDiam = (2 * distanceToTarget);
+		var inchesInYard = 36;
+		var mouInYard = ((circleDiam * PI) / totalMOA);
+		
+		mouValue = (mouInYard * inchesInYard);
+
+		return mouValue.toFixed(3);
+		}
+		
+		function troubleshootData(){
+		
+		/* Funtion to troubleshoot values */
+			document.write("----  Troubleshooting  ---- <br>")
+			document.write(distanceToTarget, "<br>")
+			document.write(targetElevation, "<br>")
+			document.write(headwind, "<br>")
+			document.write(midwind, "<br>")
+			document.write(tailwind, "<br>")
+			document.write(scopeClickValue, "<br>")
+			document.write(bulletCalibre, "<br>")
+			document.write(bulletWeight, "<br>")
+			document.write("--------------------------- <br>")
+			}
+
+		</script>
+		<noscript>
+			Your browser doesn't support or has disabled JavaScript
+		</noscript>
+			
+<!-- 
+	 *********************		
+     Table for data entry
+     *********************
+-->
+
+		<table class="shotEntry">
+		<th colspan="2" align="center">The Snipers SureShot v.47</th>
+		<form name="shotEntryForm" action="#" onSubmit="getShotData(); return false">
+			<i class="subscripts">* Assumption that scope is PBZ'd at sea level</i>
+			<tr>
+				<td>Distance To Target</td>
+				<td>
+					<input type="text" maxlength="32" name="distanceToTargetData" />
+				</td>
+			</tr>				
+				<td>Elevation differential (ft)</td>
+				<td>
+					<input type="text" maxlength="32" name="targetElevationData" />
+				</td>
+			</tr>
+			<tr>
+				<td>Wind At Shooter (mph)</td>
+				<td>
+					<input type="text" maxlength="32" name="headwindData" />
+				</td>
+			</tr>
+			<tr>
+				<td>Wind At Mid-Flight (mph)</td>
+				<td>
+					<input type="text" maxlength="32" name="midwindData" />
+				</td>
+			</tr>
+			<tr>
+				<td>Wind At Target (mph)</td>
+				<td>
+					<input type="text" maxlength="32" name="tailwindData" />
+				</td>
+			</tr>
+			<tr>
+				<td>Scope-click Value (ex. 1/4)</td>
+				<td>
+					<input type="radio" name="scopeClickValueData" value=".25" />1/4 MOA<br />
+					<input type="radio" name="scopeClickValueData" value=".125" />1/8 MOA<br />
+				</td>
+			</tr>
+			<tr>
+				<td>Balistic Calibre</td>
+				<td>
+					<input type="text" maxlength="32" name="bulletCalibreData" />
+				</td>
+			</tr>
+			<tr>
+				<td>Balistic Weight</td>
+				<td>
+					<input type="text" maxlength="32" name="bulletWeightData" />
+				</td>
+			</tr>
+				<td colspan="2" align="center">
+					<input type="submit" value="Calculate" />
+				</td>
+			</tr>		
+		</table>		
+		
+		
+<!-- 
+	 *********************		
+     Table for data ouput
+     *********************
+-->
+		<br>
+
+		<table class="shotDisplayTable">
+		<th colspan="2" align="center">Adjustment Settings</th>
+			<tr>
+				<td>MOU Value</td>
+				<td class="shotDisplayData">
+					<b>
+						<textarea cols="17" rows="1" name="mouValueData">empTy</textarea>
+					</b>				
+				</td>
+			</tr>				
+				<td>Elevation in Clicks</td>
+				<td class="shotDisplayData">
+					<b>
+						<textarea cols="17" rows="1" name="elevationInClicks">empTy</textarea>					
+					</b>			
+				</td>
+			</tr>
+			<tr>
+				<td>Azmuth in Clicks</td>
+				<td class="shotDisplayData">
+					<b>
+						<textarea cols="17" rows="1" name="azmuthInClicks">empTy</textarea>					
+					</b>				
+			</tr>
+		</form>		
+		</table>		
+	</body>
+</html>
